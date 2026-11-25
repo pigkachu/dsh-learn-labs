@@ -46,7 +46,7 @@ forge/index.js                         forge/client.js
 export const inject = ['tools', 'subprocess', 'llm', 'agentDefaultModel', 'webServer']
 ```
 
-`inject` 是**依赖声明**（OS 里的"我要链接这个库"）。写漏了的症状：`ctx.webServer` 是 `undefined`，
+`inject` 是**依赖声明**：声明的服务才有，没声明就是 `undefined`。写漏了的症状：`ctx.webServer` 是 `undefined`，
 调用时报 `Cannot read properties of undefined (reading 'register')`。
 
 在 `apply(ctx)` 里用：
@@ -401,7 +401,7 @@ const [error, setError] = useState('')
 
 - **`inject` = 链接声明**，`apply(ctx)` = 拿到句柄后干活；句柄不是白给的，声明了才有。
 - **注册就是往一张全局表里塞条目**（路由表 / 工具表 / 席位表）。塞进去的东西**必须有对应的删除路径**，
-  否则重载 = 泄漏 + 冲突。`ctx.effect` 就是"登记删除路径"的机制（类似 `atexit` / RAII 的析构）。
+  否则重载 = 泄漏 + 冲突。`ctx.effect` 就是"登记删除路径"的机制：插件卸载时它替你调那一下。
 - **`resource` 是只读约定**：只接受 GET/HEAD，天然不适合有副作用的东西 —— 编译要用 `handler`（Lab 6）。
 - **两个进程，一条 HTTP**：Host 只负责把数据变成 JSON，Client 只负责画；中间只有序列化数据能过。
 
@@ -409,7 +409,7 @@ const [error, setError] = useState('')
 
 ## 收尾
 
-通道通了、列表能看了。下一步（Lab 6）是让它"能用"：把 `compileC` 内核拆出来，
+通道通了、列表能看了。下一步（Lab 6）是让它"能用"：把 `compileC` 核心拆出来，
 加受认证的 `POST /api/forge/compile`，面板上把"一句话 → C → 编译 → 运行"串成一条链 ——
 人不用经过对话就能用同一个能力。见 `learn/lab6-task.md`。
 

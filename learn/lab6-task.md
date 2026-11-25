@@ -56,8 +56,8 @@ cordis-client-runner 都在用这个 API）。
 
 ```
 Host（forge/index.js）
-  gen_c_with_llm(spec, signal, ctx)          自然语言 → C 源码（入口层工具，不是内核）
-  compileC(source, opts, ctx)                纯编译内核：只认 C 源码，不碰模型
+  gen_c_with_llm(spec, signal, ctx)          自然语言 → C 源码（入口层工具，不是核心）
+  compileC(source, opts, ctx)                纯编译核心：只认 C 源码，不碰模型
   apply(ctx)
     ├ 4 个 tool（build_c = spec → gen → compileC）
     └ 两条 /api 路由（ctx.connection.fetch.register）
@@ -85,7 +85,7 @@ Client（forge/client.js）
                             （失败：非 2xx + {error}）
 ```
 
-**「谁来生成」在入口层**：工具 `build_c` 和 `compile` 路由都先调 `gen_c_with_llm` 再调 `compileC`（两家各自调，或抽一个共用的小 helper；这样两个入口的能力不会走偏）。`compileC` 内核始终不碰模型。
+**「谁来生成」在入口层**：工具 `build_c` 和 `compile` 路由都先调 `gen_c_with_llm` 再调 `compileC`（两家各自调，或抽一个共用的小 helper；这样两个入口的能力不会走偏）。`compileC` 核心始终不碰模型。
 如果以后想「直接编译我手写的 C」，**再加一条 `POST /api/forge/raw`**（body 里是 `source`，直接调 `compileC`），不用动 `compile`。
 
 ---
@@ -94,10 +94,10 @@ Client（forge/client.js）
 
 要点：
 
-- 内核签名 `compileC(source, opts, ctx)`，`opts: { name?, run?, stdin?, signal? }`；没有 `args`/`exec`。
-- 内核**不碰模型**；`gen_c_with_llm` 是入口层的工具。
+- 核心签名 `compileC(source, opts, ctx)`，`opts: { name?, run?, stdin?, signal? }`；没有 `args`/`exec`。
+- 核心**不碰模型**；`gen_c_with_llm` 是入口层的工具。
 - 返回 `{id, dir, source, binary, compile_stdout, compile_stderr}`（`run_*` 在 S4 补）。
-- 失败策略：内核**抛异常**（`gcc` 非零就抛 `Error(stderr)`）。
+- 失败策略：核心**抛异常**（`gcc` 非零就抛 `Error(stderr)`）。
 - 两个入口各自决定怎么呈现失败：工具入口 catch 成 `{err, err_log}` 给模型看；HTTP 入口 catch 成 `{error}` + 状态码给浏览器看。
 - 跨边界的铁律：进程/HTTP 边界只传 JSON，`Error` 对象和它的字段不写进返回值就全消失。
 - 文件名校验：规则一份（小函数），调用点在 gen **之前**、compileC **之前**（先校验再花钱）。
@@ -256,7 +256,7 @@ function Hello(props) {
 **② 渲染 = 组件函数整个重跑**
 
 状态一变，React 把函数**再调一次**，拿新描述跟旧的对比，只改变化的部分。
-类比：每次重新执行一遍脚本，不是原地改内存。
+也就是把函数整个再跑一遍，React 拿新结果和旧的对比，只改变化的部分。
 
 **③ 状态寄存处：`useState`**
 
@@ -270,7 +270,7 @@ const [count, setCount] = useState(0)    // 首次 = 0
 - `setCount(5)` = 改那块内存 + 触发重跑；
 - `count = 5` 没用（改的是本轮快照，下次渲染就没了，也不重跑）。
 
-类比：局部变量在栈上；`useState` 在堆上，写它时唤醒调度器。
+普通变量每次渲染都重新创建；`useState` 的值由 React 替你存着，调用 setter 才触发重画。
 
 **④ 事件：传函数，不传调用结果**
 

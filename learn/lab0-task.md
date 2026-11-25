@@ -215,14 +215,14 @@ dsh web
 
 ## 原理小结
 
-| 概念 | 一句话 | OS 类比 |
-|---|---|---|
-| `$DSH_HOME` | DSH 的"根目录" | `/etc` + `/var/lib` 合体 |
-| profile | 一套插件组合（`web` / `headless` / `acp` …） | 一个发行版/rootfs |
-| bundle | 一组插件 + 一份 patch 层 | 一个安装包 |
-| plugin | 树上的一个节点 | 一个驱动/服务 |
-| `dsh plugin --profile <name> add <pkg>` | 命令行版的插件安装 | `apt install` |
-| PATH | 系统去哪找 `gcc.exe` / `node` | 和 Linux 同一套查找规则 |
+| 概念 | 一句话 |
+|---|---|
+| `$DSH_HOME` | DSH 的"根目录"：配置、会话、插件树都在这（默认 `~/.dsh`） |
+| profile | 一套插件组合（`web` / `headless` / `acp` …） |
+| bundle | 一组插件 + 一份 patch 层，装了就进 profile |
+| plugin | 插件树上的一个节点，一个入口/服务 |
+| `dsh plugin --profile <name> add <pkg>` | 命令行版的插件安装 |
+| PATH | 系统去哪找 `node` / `gcc`（Windows 上同理） |
 
 **Lab 0 的结论**：DSH 不是单个二进制，而是"Node 运行时 + 一套 profile（插件组合）+ 一个 Web 宿主"。插件开发就是往这个组合里加自己的节点 —— 这也是为什么后面所有 Lab 的"装/重载"步骤都围绕 profile。
 Windows 上同样如此：gcc 只是被 `spawn` 的一个子进程，所以只要 `gcc --version` 能在终端里跑通，后面的课和 Linux 版没本质区别，差异都在 S7 那张表里。

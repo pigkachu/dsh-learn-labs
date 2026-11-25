@@ -13,7 +13,7 @@
 ```
 
 在 DSH 里，插件就是一个 Cordis 模块：露出 `inject`（我要哪些服务）和 `apply(ctx)`（我做什么）。
-`ctx` 是服务容器 —— 类似进程里已经初始化好的"内核对象表"。
+`ctx` 是服务容器：插件能用的服务（工具、子进程、模型…）都挂在它上面。
 
 ---
 
@@ -59,7 +59,7 @@ export function apply(ctx) {           // DSH 会调用它
 }
 ```
 
-**要点**：`ctx` 只存在于 `apply` 里。**模块顶层写 `ctx.xxx` 会 `ReferenceError`** —— 这是新手第一个坑（OS 类比：`ctx` 是进程初始化后才有得指针，不是全局变量）。
+**要点**：`ctx` 只存在于 `apply` 里。**模块顶层写 `ctx.xxx` 会 `ReferenceError`** —— 这是新手第一个坑：`ctx` 是 `apply` 的参数，不是全局变量。
 
 装进 profile（`plugin_manager(action:"install_bundle", target:"<插件绝对路径>")`），DSH 会重启组合并加载你的插件。
 装完可以看一眼 profile 的 `package.json`（`~/.dsh/profiles/web/package.json`）：多了 `"@learn/forge": "link:<你的目录>"`，
@@ -141,17 +141,17 @@ Hello-DSH!
 
 ## 原理小结
 
-| 概念 | 一句话 | OS 类比 |
-|---|---|---|
-| `inject` | 声明依赖的服务 | 头文件/链接依赖 |
-| `apply(ctx)` | 插件入口 | `main()` |
-| `ctx.tools.register` | 往内核注册一个能力 | 注册 syscall |
-| `parameters` | 参数的契约 | 函数原型 + 类型检查 |
-| `output.schema` | 返回值的契约 | 返回类型 + 运行时断言 |
-| `render` | 给模型看的呈现层 | `printf` 格式化 |
-| 重载 | 卸载旧插件、装新插件 | `rmmod` / `insmod` |
+| 概念 | 一句话 |
+|---|---|
+| `inject` | 声明这个插件要用哪些宿主服务，声明的才能用 |
+| `apply(ctx)` | 插件入口函数，DSH 加载插件时调用一次 |
+| `ctx.tools.register` | 往工具表里注册一个能力 |
+| `parameters` | 参数的契约：模型传参前按它校验 |
+| `output.schema` | 返回值的契约：不匹配直接报错，不进 `render` |
+| `render` | 决定结果给模型看时长什么样 |
+| 重载 | 卸载旧插件、装新插件（Host 改动后必须做） |
 
-**Lab 1 的结论**：参数和返回值都有"内核帮你校验"的契约 —— 你不需要防御性检查类型，但也不能越界。
+**Lab 1 的结论**：参数和返回值都有"宿主帮你校验"的契约 —— 你不需要防御性检查类型，但也不能越界。
 
 ---
 
