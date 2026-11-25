@@ -1,0 +1,31 @@
+# 公开仓库只收「工作单 + 附录」，下面这些留在本地。
+
+# —— 作者自己的实现（不是教程内容，含个人取舍）——
+forge/
+
+# —— 练习过程 / 构建产物 ——
+forge-out/
+scratchpad-plugin/
+js-demos/
+reference/
+setup/
+tools/
+.npm-cache/
+node_modules/
+
+# —— 会话进度记录 ——
+PROGRESS.md
+AGENTS.md
+
+# —— 早期独立文档（已被 learn/lab*.md 取代）——
+TUTORIAL-forge.md
+TUTORIAL-forge-windows.md
+DSH-插件-开发与安装流程.md
+DSH-插件开发入门.md
+DSH-插件开发知识地图.md
+
+# —— learn/ 里的旁支练习材料 ——
+learn/hello.mjs
+learn/client.annotated.js
+learn/try-filter.mjs
+learn/exercise-search.md

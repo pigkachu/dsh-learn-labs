@@ -1,0 +1,3 @@
+- insert:
+    - id: forge-example
+      name: '@example/forge'
