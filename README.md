@@ -152,6 +152,10 @@ example/                  参考实现（Host + Client）
 
 构建产物、本地练习材料不在仓库里，见 `.gitignore`。
 
+## 许可证
+
+MIT，见 [`LICENSE`](LICENSE)。文档和 `example/` 的代码都按 MIT 授权 —— 拿去用、改、再分发都行，保留版权声明即可。
+
 ## 版本
 
 针对 DSH `0.2.2-rc.1` 写。DSH 还在 rc 阶段，后续版本的工具契约、席位名、路由 API 可能变；
