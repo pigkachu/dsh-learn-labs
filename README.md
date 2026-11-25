@@ -21,7 +21,7 @@
 
 ## 怎么用
 
-1. 先做 Lab 0：Linux / WSL2 走 [`learn/lab0-task.md`](learn/lab0-task.md)，Windows 走 [`learn/lab0-windows-task.md`](learn/lab0-windows-task.md)。**一次只读一节**，别通读。
+1. 从 [`learn/lab0-task.md`](learn/lab0-task.md) 开始（Linux / WSL2 / Windows 都在里面）。**一次只读一节**，别通读。
 2. 每节末尾有验收清单，过了再往下走。
 3. 卡住了说「卡在哪一步」，问 AI 要提示，而不是让它把实现写出来。
 4. 两类改动生效方式不同：Host 半边（`index.js`）改完**必须重载插件**；client 半边（`client.js`）改完**刷新页面**即可。
@@ -38,16 +38,13 @@ DSH、Codex 这类会自动加载 `AGENTS.md` 的 AI 看到它就知道该先读
 
 | Lab | 做什么 | 产出 | 学到 |
 |---|---|---|---|
-| [0](learn/lab0-task.md) | 裸 Linux 搭环境 | `dsh web` 能打开 GUI | Node / pnpm / profile |
-| [0·Windows](learn/lab0-windows-task.md) | Windows 上搭环境（和 0 二选一） | `dsh web` + gcc | MinGW / PATH / 平台差异 |
+| [0](learn/lab0-task.md) | 搭环境（Linux / WSL2 / Windows 三选一） | `dsh web` 能打开 GUI | Node / pnpm / gcc / profile |
 | [1](learn/lab1-task.md) | 第一个工具 | `echo_text` | 插件骨架、tool 契约、热重载 |
 | [2](learn/lab2-task.md) | 调宿主能力 | `sys_info` | `ctx.subprocess`、受管子进程 |
 | [3](learn/lab3-task.md) | 调模型 | `gen_c` | `ctx.llm.stream` 流式、抽 markdown 围栏 |
 | [4](learn/lab4-task.md) | 落盘 + 编译 | `build_c` | 产物写工作区、spawn gcc、object 输出 |
-| [5a](learn/lab5a-task.md) | 裸 HTTP 路由 | `GET /forge/builds` | 路由表、`ctx.effect` 生命周期 |
-| [5b](learn/lab5b-task.md) | 浏览器半边 | Forge 面板 | 两个进程、`slots` 席位、四态、stale closure |
-| [6](learn/lab6-task.md) | 受认证路由 + 控制台 | `/api/forge/compile`、Compiler 面板 | `connection.fetch`、错误契约 |
-| [6·S5](learn/lab6-s5-task.md) | 面板接线（单出一份） | 自然语言 → C → 编译 → 运行 | React 最小集、HTTP 契约 |
+| [5](learn/lab5-task.md) | Host 路由 + 浏览器面板 | `GET /forge/builds` + Forge 面板 | 路由表、`ctx.effect`、两个进程、`slots` 席位、四态、stale closure |
+| [6](learn/lab6-task.md) | 受认证路由 + 控制台面板 | `/api/forge/*` + 自然语言 → C → 编译 → 运行 | `connection.fetch`、错误契约、React 最小集 |
 
 主线其实只有一条：**同一个能力，两个入口**。Lab 4 把能力做成工具（模型调），Lab 6 把它接到面板（人调）。
 

@@ -25,7 +25,7 @@
 export const inject = ['tools', 'subprocess', 'llm', 'agentDefaultModel']
 ```
 
-> 到 Lab 6 这个数组会更长（Lab 5a / Lab 6 又加了 `'webServer'`、`'connection'`），因为所有 Lab 都堆在同一个包里。
+> 到 Lab 6 这个数组会更长（Lab 5 加了 `'webServer'`，Lab 6 又加了 `'connection'`），因为所有 Lab 都堆在同一个包里。
 
 - `llm` —— 调模型。
 - `agentDefaultModel` —— 拿到"当前会话选的模型"，不然你不知道该调哪个 provider/model。

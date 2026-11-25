@@ -15,11 +15,11 @@
 | `index.js` `sys_info` | Lab 2：`resolveExecutable` → `spawn` → `done` → `readFrom` |
 | `index.js` `gen_c_with_llm` / `extractCode` | Lab 3：`ctx.llm.stream` 流式 + 抽代码 + `finish.reason` |
 | `index.js` `compileC` | Lab 4：落盘、gcc、可选运行（Lab 6 S4 的 `run_*` 也在这） |
-| `index.js` `get_builds` / `/api/forge/builds` | Lab 5a（换成 `/api` 后）：读目录 → 数组 |
+| `index.js` `get_builds` / `/api/forge/builds` | Lab 5（读目录 → 数组）+ Lab 6（换成 `/api` 后） |
 | `index.js` `/api/forge/compile` | Lab 6：`ctx.connection.fetch.register`，400 / 500 分层 |
-| `client.js` `BuildsPanel` | Lab 5b：席位、四态、stale closure |
-| `client.js` `CompilerPanel` | Lab 6 S5：受控输入、提交、成功/失败两种呈现 |
-| `package.json` / `cordis.patch.yml` | Lab 1 + Lab 5b：包名、bundle patch、client 声明 |
+| `client.js` `BuildsPanel` | Lab 5：席位、四态、stale closure |
+| `client.js` `CompilerPanel` | Lab 6：受控输入、提交、成功/失败两种呈现 |
+| `package.json` / `cordis.patch.yml` | Lab 1 + Lab 5：包名、bundle patch、client 声明 |
 
 ## 读它的时候重点看三件事
 

@@ -47,7 +47,7 @@
 这一行就是"把这个包作为一个插件节点插进 DSH 的插件树"。`id` 是**实例名**（随便叫，这里叫 `forge`），`name` 是要加载的**包名**。
 
 > 名字只有一个：**`@learn/forge`**。`package.json` 的 `name`、这里的 `name`、profile 里依赖的键，三处必须一致。
-> 后面 Lab 5b 的 client 半边还要第四处一致：`__ModuleLoader__.load({ id: '@learn/forge' })`。不一致是公开插件的第一大坑。
+> 后面 Lab 5 的 client 半边还要第四处一致：`__ModuleLoader__.load({ id: '@learn/forge' })`。不一致是公开插件的第一大坑。
 
 ### `index.js`
 

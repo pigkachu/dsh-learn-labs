@@ -40,7 +40,7 @@
 
 ## 环境事实（先跟学习者对一下）
 
-- DSH `0.2.2-rc.1` 或更新；Node ≥ 24.9；Linux / WSL2，或 Windows（见 `learn/lab0-windows-task.md`）
+- DSH `0.2.2-rc.1` 或更新；Node ≥ 24.9；Linux / WSL2，或 Windows（见 `learn/lab0-task.md`）
 - 插件 = Cordis 模块：`export const inject = [...]` + `export function apply(ctx)`
 - 产物写工作区（`forge-out/`），别写 `/tmp`
 - 参考：`learn/tool-schema-cheatsheet.md`、`learn/tool-subprocess-api.md`、`learn/tool-llm-api.md`
@@ -60,8 +60,7 @@
 | 2 | `argv` 不是数组；忘了 `await handle.done` 就读输出；采集模式和 `'pipe'` 模式混用 |
 | 3 | `text-delta` 拼错；不判 `finish.reason.kind`；抽围栏的正则写成了字符串 |
 | 4 | 把 `await mkdir(...)` 的返回值当路径（已存在时是 `undefined`）；`writeFile` 没 `await`；返回相对路径 |
-| 5a | 裸路由没包 `ctx.effect` → 重载时 `duplicate exact route` |
-| 5b | `main` 的 `key` ≠ 侧栏的 `id`（有图标、点了没反应）；hooks 放在 `return` 后面；`useEffect` 写成 `async`；stale closure |
+| 5 | 裸路由没包 `ctx.effect` → 重载时 `duplicate exact route`；`main` 的 `key` ≠ 侧栏的 `id`（有图标、点了没反应）；hooks 放在 `return` 后面；`useEffect` 写成 `async`；stale closure |
 | 6 | `fetch` 里 `throw` → 500 空 body；没返回 `Response`；Host/Client 路径差一个 `/api`；schema 写成 `['number','null']` |
 
 ## 不要做
@@ -73,5 +72,5 @@
 
 ## 毕业判据
 
-他能独立写出 Lab 6 S5 的面板（自然语言 → 源码 + 编译结果 + 运行输出），并且能说清：
+他能独立写出 Lab 6 的面板（自然语言 → 源码 + 编译结果 + 运行输出），并且能说清：
 Host 半边和 Client 半边各自负责什么、能力为什么写在函数里、失败为什么要分 400 / 500。
