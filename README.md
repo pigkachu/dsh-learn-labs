@@ -13,7 +13,7 @@
 |---|---|
 | DSH | 0.2.x（写这套材料时是 `0.2.2-rc.1`） |
 | Node | ≥ 24.9（DSH 的 `engines` 要求） |
-| 系统 | Linux 或 WSL2；有 `gcc`（Lab 4 开始用） |
+| 系统 | Linux / WSL2，或 Windows；有 `gcc`（Lab 4 开始用） |
 | pnpm | 插件安装器内部要 `spawn pnpm` |
 | 一个 AI 会话 | 装/重载插件靠 AI 的工具（`plugin_manager`），不是命令行 |
 
@@ -21,16 +21,25 @@
 
 ## 怎么用
 
-1. 从 [`learn/lab0-task.md`](learn/lab0-task.md) 开始，**一次只读一节**，别通读。
+1. 先做 Lab 0：Linux / WSL2 走 [`learn/lab0-task.md`](learn/lab0-task.md)，Windows 走 [`learn/lab0-windows-task.md`](learn/lab0-windows-task.md)。**一次只读一节**，别通读。
 2. 每节末尾有验收清单，过了再往下走。
 3. 卡住了说「卡在哪一步」，问 AI 要提示，而不是让它把实现写出来。
 4. 两类改动生效方式不同：Host 半边（`index.js`）改完**必须重载插件**；client 半边（`client.js`）改完**刷新页面**即可。
+
+## 给 AI 的
+
+这套材料本来就是"AI 当助教、你写代码"练出来的。把仓库交给你的 AI，让它先读 [`AI-GUIDE.md`](AI-GUIDE.md)：
+里面写了它的角色（**只给签名和审查，不代写**）、每轮流程、只有它能做的装 / 重载 / 验证操作，以及常见坑。
+
+仓库根目录还有一份 `AGENTS.md`，只做一件事：指向 `AI-GUIDE.md`（不放正文，免得和维护两份）。
+DSH、Codex 这类会自动加载 `AGENTS.md` 的 AI 看到它就知道该先读哪份。
 
 ## 课程表
 
 | Lab | 做什么 | 产出 | 学到 |
 |---|---|---|---|
 | [0](learn/lab0-task.md) | 裸 Linux 搭环境 | `dsh web` 能打开 GUI | Node / pnpm / profile |
+| [0·Windows](learn/lab0-windows-task.md) | Windows 上搭环境（和 0 二选一） | `dsh web` + gcc | MinGW / PATH / 平台差异 |
 | [1](learn/lab1-task.md) | 第一个工具 | `echo_text` | 插件骨架、tool 契约、热重载 |
 | [2](learn/lab2-task.md) | 调宿主能力 | `sys_info` | `ctx.subprocess`、受管子进程 |
 | [3](learn/lab3-task.md) | 调模型 | `gen_c` | `ctx.llm.stream` 流式、抽 markdown 围栏 |

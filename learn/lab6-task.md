@@ -232,6 +232,7 @@ handle.collected.stdout.readFrom(0).text
 所以 schema 里它只能是 `{ type: 'number' }`，不能写 `['number','null']`（DSH 的 schema 子集不支持联合类型，插件会加载失败）。
 
 注意：`stdin: { data }` 是“写完后立刻关闭”，`fscanf` 能读到 EOF；程序不读 stdin 时传空串无影响。
+Windows 上产物是 `.exe`，`argv` 指它就行（平台差异见 [`lab0-windows-task.md`](lab0-windows-task.md)）。
 
 ---
 

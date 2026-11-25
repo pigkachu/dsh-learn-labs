@@ -15,7 +15,8 @@ node_modules/
 
 # —— 会话进度记录 ——
 PROGRESS.md
-AGENTS.md
+# 注意：AGENTS.md **不**在忽略列表里。仓库根目录的 AGENTS.md 是给 AI 的公开指针；
+# 工作区自己那份是同名的私人记录，发布靠手动拷文件，不要一起拷过去。
 
 # —— 早期独立文档（已被 learn/lab*.md 取代）——
 TUTORIAL-forge.md

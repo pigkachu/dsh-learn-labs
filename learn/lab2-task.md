@@ -86,6 +86,8 @@ parameters: { type: 'object', properties: {}, required: [] }
 
 成功时返回类似 `Linux ... x86_64` 的一行。
 
+> Windows 没有 `uname`：把 `argv` 换成 `['cmd', '/c', 'ver']`。见 [`lab0-windows-task.md`](lab0-windows-task.md) 的平台差异表。
+
 ---
 
 ## 排错对照表

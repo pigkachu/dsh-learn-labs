@@ -88,6 +88,7 @@ signal: exec.signal
 
 要点：
 
+- **Windows 上产物后缀用 `.exe`**，不是 `.bin`（平台差异见 [`lab0-windows-task.md`](lab0-windows-task.md)）。
 - **`cwd` 设成本次的子目录**，`argv` 里用相对文件名 —— 路径短、不会串。
 - 判成功：`exitCode === 0`。失败时**读 stderr**（gcc 的行号和原因都在 stderr）。
 - 必须 `await handle.done`，否则你不知道编译成没成功。
